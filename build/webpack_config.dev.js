@@ -11,5 +11,6 @@ module.exports = webpack_merge(base, {
     hot: true,
     proxy: config.dev.proxyTable
   },
+  watch: true,
   plugins: plugins
 })

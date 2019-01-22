@@ -8,7 +8,8 @@ const entry = {
 const html_list = fs.readdirSync(moduleDir)
 
 html_list.forEach(file => {
-  entry[file] = `./src/views/${file}`
+  entry[file] = ['webpack-hot-middleware/client?reload=true', `./src/views/${file}`]
+  // entry[file] = `./src/views/${file}`
 })
 
 module.exports = entry

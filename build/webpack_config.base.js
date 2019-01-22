@@ -67,12 +67,12 @@ module.exports = {
       }
     ]
   },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      name: 'vendors'
-    },
-    // Keep the runtime chunk seperated to enable long term caching
-    runtimeChunk: true
-  }
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: 'all',
+  //     name: 'vendors'
+  //   },
+  //   // Keep the runtime chunk seperated to enable long term caching
+  //   runtimeChunk: true
+  // }
 }
