@@ -7,10 +7,18 @@ const entry = require('./entry')
 
 const base_plugin = [
   new webpack.DefinePlugin({
-    'env': dev
+    'process.env': dev
   }),
   new webpack.HotModuleReplacementPlugin(),
   new extractTextPlugin(utils.resolve(`css/[name].css`)),
+  new webpack.optimize.SplitChunksPlugin({
+    chunks: "all",
+    minSize: 20000,
+    minChunks: 1,
+    maxAsyncRequests: 5,
+    maxInitialRequests: 3,
+    name: true
+  }),
   new htmlPlugin({
     filename: 'index.html',
     template: './index.html',

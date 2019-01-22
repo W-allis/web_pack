@@ -3,6 +3,11 @@ const webpack_merge = require('webpack-merge')
 const base = require('./webpack_config.base')
 const config = require('../config')
 const plugins = require('./plugin.build')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+
+if (process.env.analyzer) {
+  plugins.push(new BundleAnalyzerPlugin())
+}
 
 module.exports = webpack_merge(base, {
   devtool: process.env.BASE_ENV === 'prod' ? false : 'source-map',

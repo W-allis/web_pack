@@ -9,7 +9,7 @@ const entry = require('./entry')
 
 const base_plugin = [
   new webpack.DefinePlugin({
-    'env': dev
+    'process.env': dev
   }),
   new cleanPlugin(['dist/*'], {
     root: path.resolve(__dirname, '../')
@@ -21,7 +21,7 @@ const base_plugin = [
     title: 'webpack_plugin',
     favicon: './assets/img/foo.jpg',
     inject: true,
-    chunks: ['app'],
+    chunks: ['app', 'jquery'],
     head: {
       css: ['app']
     }

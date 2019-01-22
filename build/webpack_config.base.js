@@ -6,7 +6,7 @@ const entry = require('./entry')
 
 module.exports = {
 
-  entry: Object.assign({ app: './src/main'}, entry),
+  entry: Object.assign({ app: './src/main' }, entry),
   output: {
     filename: utils.resolve('js/[name]_[hash:8].js'),
     path: path.resolve(__dirname, config.dev.root_path),
@@ -28,6 +28,14 @@ module.exports = {
           }
         ],
         exclude: /node_modules/
+      },
+      {
+        test: /\.tpl$/,
+        use: [
+          {
+            loader: 'ejs-loader'
+          }
+        ]
       },
       // 基于 webpack4 必须要 npm i extract-text-webpack-plugin@next
       {
@@ -67,12 +75,19 @@ module.exports = {
       }
     ]
   },
-  // optimization: {
-  //   splitChunks: {
-  //     chunks: 'all',
-  //     name: 'vendors'
-  //   },
-  //   // Keep the runtime chunk seperated to enable long term caching
-  //   runtimeChunk: true
-  // }
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      cacheGroups: {
+        vendor: {
+          // test: /node_modules/,
+          name: 'vendor',
+          minChunks: 2,
+          priority: 10
+        }
+      }
+    },
+    // Keep the runtime chunk seperated to enable long term caching
+    // runtimeChunk: true
+  }
 }

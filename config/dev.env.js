@@ -1,3 +1,3 @@
 module.exports = {
-  api: '"api-qa"'
+  api: '"/api-qa"'
 }

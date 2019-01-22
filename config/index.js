@@ -5,11 +5,11 @@ module.exports = {
     publicPath: '/',
 
     proxyTable: {
-      'api': {
+      '/api-qa': {
         target: 'http://localhost:8001',
         changeOrigin: true,
         pathRewrite: {
-          '^/api': ''
+          '^/api-qa': ''
         }
       }
     }

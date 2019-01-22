@@ -3,6 +3,7 @@ const express = require('express')
 const path = require('path')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
+const proxyMiddleware = require('http-proxy-middleware')
 const config = require('../config')
 const webpack_config = require('./webpack_config.dev')
 
@@ -19,6 +20,11 @@ app.use(file_module)
 app.use(hot_module)
 
 app.use(root_module)
+
+// node 反向代理
+Object.keys(config.dev.proxyTable).forEach(item => {
+  app.use(item, proxyMiddleware(config.dev.proxyTable[item]))
+})
 
 app.listen(9538, _=> {
   console.log('server is running')
