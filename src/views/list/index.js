@@ -30,6 +30,11 @@ Ob.prototype = {
     }
     return this.pushCallback(_)   
   },
+  debounceTime: function(time) {
+    function _() {
+
+    }
+  },
   notify: function() {
     console.log(this._isScal)
     if (this._isScal) {

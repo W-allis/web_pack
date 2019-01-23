@@ -13,5 +13,19 @@ module.exports = webpack_merge(base, {
   devtool: process.env.BASE_ENV === 'prod' ? false : 'source-map',
   // production 可以压缩代码 4.0 之前用uglifyjs-webpack-plugin
   mode: process.env.BASE_ENV === 'prod' ? 'production' : 'development',
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          chunks: 'all',
+          test: /[\\/]node_modules[\\/]/
+        }
+      }
+    },
+    runtimeChunk: {
+      name: 'runtime'
+    }
+  },
   plugins: plugins
 })

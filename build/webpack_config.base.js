@@ -5,8 +5,8 @@ const extractTextPlugin = require('extract-text-webpack-plugin')
 const entry = require('./entry')
 
 module.exports = {
-
-  entry: Object.assign({ app: './src/main' }, entry),
+  
+  entry: Object.assign({ app: process.env.BASE_ENV ? './src/main' : ['webpack-hot-middleware/client?reload=true', './src/main'] }, entry),
   output: {
     filename: utils.resolve('js/[name]_[hash:8].js'),
     path: path.resolve(__dirname, config.dev.root_path),
@@ -60,6 +60,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
+              limit: 10000,
               name: utils.resolve('img/[name].[ext]')
             }
           }
@@ -74,20 +75,7 @@ module.exports = {
         ]
       }
     ]
-  },
-  optimization: {
-    splitChunks: {
-      chunks: 'async',
-      cacheGroups: {
-        vendor: {
-          // test: /node_modules/,
-          name: 'vendor',
-          minChunks: 2,
-          priority: 10
-        }
-      }
-    },
+  }
     // Keep the runtime chunk seperated to enable long term caching
     // runtimeChunk: true
-  }
 }

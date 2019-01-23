@@ -21,7 +21,7 @@ const base_plugin = [
     title: 'webpack_plugin',
     favicon: './assets/img/foo.jpg',
     inject: true,
-    chunks: ['app', 'jquery'],
+    chunks: ['app', 'runtime', 'vendor'],
     head: {
       css: ['app']
     }
@@ -33,10 +33,19 @@ Object.keys(entry).forEach(file => {
     filename: `views/${file}.html`,
     template: `./src/views/${file}/index.html`,
     inject: true,
-    chunks: [`${file}`],
+    chunks: [`${file}`, 'runtime', 'vendor'],
     head: {
       css: [`${file}`]
-    }
+    },
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true
+      // more options:
+      // https://github.com/kangax/html-minifier#options-quick-reference
+    },
+    // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+    chunksSortMode: 'dependency'
   }))
 })
 

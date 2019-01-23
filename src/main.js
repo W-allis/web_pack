@@ -1,10 +1,9 @@
-import 'webpack-hot-middleware/client?reload=true'
 import '../style.less'
-import $ from 'jquery'
+// import $ from 'jquery'
 
 const [a, b] = [1, 2]
 
-console.log($)
+// console.log($)
 
 console.log(a, b)
 

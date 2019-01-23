@@ -8,7 +8,7 @@ const entry = {
 const html_list = fs.readdirSync(moduleDir)
 
 html_list.forEach(file => {
-  entry[file] = ['webpack-hot-middleware/client?reload=true', `./src/views/${file}`]
+  entry[file] = process.env.BASE_ENV ? `./src/views/${file}` : ['webpack-hot-middleware/client?reload=true', `./src/views/${file}`]
   // entry[file] = `./src/views/${file}`
 })
 
