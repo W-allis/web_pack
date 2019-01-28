@@ -15,10 +15,12 @@ const root_module = express.static(path.resolve(__dirname, config.dev.root_path)
 const file_module = webpackDevMiddleware(compiler, webpack_config.devServer)
 const hot_module = webpackHotMiddleware(compiler)
 
+// 必须先生成文件然后开启服务
 app.use(file_module)
 
 app.use(hot_module)
 
+// 必须在文件生成之后访问
 app.use(root_module)
 
 // node 反向代理
